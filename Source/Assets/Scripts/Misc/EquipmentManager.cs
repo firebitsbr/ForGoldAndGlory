@@ -13,7 +13,8 @@ public class EquipmentManager : MonoBehaviour
     {
         Weapon,     // 0
         Armor,      // 1
-        Boots       // 2
+        Boots,      // 2
+        Helmet      // 3
     }
 
     #endregion Enums
@@ -31,6 +32,7 @@ public class EquipmentManager : MonoBehaviour
     public Weapon[] ArrayOfWeapons;
     public Armor[] ArrayOfArmors;
     public Armor[] ArrayOfBoots;
+    public Armor[] ArrayOfHelmets;
 
     #endregion Members
 

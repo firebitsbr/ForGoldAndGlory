@@ -25,13 +25,17 @@ public class Player : MonoBehaviour
     { get { return this.localTransform.position; } }
 
     public Weapon CurrentWeapon;
+    public Armor CurrentHelmet;
     public Armor CurrentArmor;
     public Armor CurrentBoots;
     public Transform AimSpot;
 
     private Transform localTransform;
+    private GameObject graphicsObject;
     private SpriteRenderer weaponRenderer;
-    private SpriteRenderer bodyRenderer;
+    private SpriteRenderer helmetRenderer;
+    private SpriteRenderer armorRenderer;
+    private SpriteRenderer bootsRenderer;
 
     private int level = 1;
     private int experience = 0;
@@ -67,11 +71,17 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        this.weaponRenderer = this.localTransform.Find("Weapon").GetComponent<SpriteRenderer>();
-        this.bodyRenderer = this.localTransform.Find("Graphics").GetComponent<SpriteRenderer>();
+        this.graphicsObject = this.localTransform.Find("Graphics").gameObject;
+        this.weaponRenderer = this.localTransform.Find("Graphics/Weapon").GetComponent<SpriteRenderer>();
+        this.helmetRenderer = this.localTransform.Find("Graphics/Helmet").GetComponent<SpriteRenderer>();
+        this.armorRenderer = this.localTransform.Find("Graphics/Armor").GetComponent<SpriteRenderer>();
+        this.bootsRenderer = this.localTransform.Find("Graphics/Boots").GetComponent<SpriteRenderer>();
 
         Respawn();
         UpdateItem(this.CurrentWeapon, EquipmentManager.ItemCategory.Weapon);
+        UpdateItem(this.CurrentHelmet, EquipmentManager.ItemCategory.Helmet);
+        UpdateItem(this.CurrentArmor, EquipmentManager.ItemCategory.Armor);
+        UpdateItem(this.CurrentBoots, EquipmentManager.ItemCategory.Boots);
 
         PlayerInfoGui.Instance.UpdateExperienceBar(0f);
     }
@@ -121,11 +131,22 @@ public class Player : MonoBehaviour
             this.weaponRenderer.sprite = this.CurrentWeapon.Sprite;
         }
         else if (category == EquipmentManager.ItemCategory.Armor)
-        { this.CurrentArmor = (item as Armor); }
+        { 
+            this.CurrentArmor = (item as Armor);
+            this.armorRenderer.sprite = this.CurrentArmor.Sprite;
+        }
         else if (category == EquipmentManager.ItemCategory.Boots)
-        { this.CurrentBoots = (item as Armor); }
+        { 
+            this.CurrentBoots = (item as Armor);
+            this.bootsRenderer.sprite = this.CurrentBoots.Sprite;
+        }
+        else if (category == EquipmentManager.ItemCategory.Helmet)
+        { 
+            this.CurrentHelmet = (item as Armor);
+            this.helmetRenderer.sprite = this.CurrentHelmet.Sprite;
+        }
 
-        this.totalArmorValue = this.CurrentArmor.ArmorValue + this.CurrentBoots.ArmorValue;
+        this.totalArmorValue = this.CurrentArmor.ArmorValue + this.CurrentBoots.ArmorValue + this.CurrentHelmet.ArmorValue;
         
         PlayerInfoGui.Instance.UpdateDamageLabel(this.CurrentWeapon.Damage);
         PlayerInfoGui.Instance.UpdateArmorLabel(this.totalArmorValue);
@@ -182,13 +203,11 @@ public class Player : MonoBehaviour
         BattleManager.Instance.PlayerHasDied();
         MainGui.Instance.ShowPlayerHaveDied();
 
-        this.bodyRenderer.enabled = false;
-        this.weaponRenderer.enabled = false;
+        this.graphicsObject.SetActive(false);
 
         yield return new WaitForSeconds(2f);
 
-        this.bodyRenderer.enabled = true;
-        this.weaponRenderer.enabled = true;
+        this.graphicsObject.SetActive(true);
 
         Respawn();
     }

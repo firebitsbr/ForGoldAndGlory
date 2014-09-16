@@ -21,6 +21,7 @@ public class ShopGui : MonoBehaviour
     private List<GameObject> listOfWeapons = new List<GameObject>();
     private List<GameObject> listOfArmors = new List<GameObject>();
     private List<GameObject> listOfBoots = new List<GameObject>();
+    private List<GameObject> listOfHelmets = new List<GameObject>();
 
     #endregion Members
 
@@ -57,6 +58,12 @@ public class ShopGui : MonoBehaviour
             this.TooltipInfo.text = Player.Instance.CurrentBoots.ArmorValue.ToString("N0");
             this.TooltipIcon.spriteName = "ArmorIcon";
         }
+        else if (this.currentCategory == EquipmentManager.ItemCategory.Helmet)
+        {
+            this.TooltipHeader.text = Player.Instance.CurrentHelmet.ItemName;
+            this.TooltipInfo.text = Player.Instance.CurrentHelmet.ArmorValue.ToString("N0");
+            this.TooltipIcon.spriteName = "ArmorIcon";
+        }
     }
 
     public void HideToolTip()
@@ -64,6 +71,9 @@ public class ShopGui : MonoBehaviour
 
     public void OnPressingWeaponBtn()
     { SwitchItemCategory(EquipmentManager.ItemCategory.Weapon); }
+
+    public void OnPressingHelmetBtn()
+    { SwitchItemCategory(EquipmentManager.ItemCategory.Helmet); }
 
     public void OnPressingArmorBtn()
     { SwitchItemCategory(EquipmentManager.ItemCategory.Armor); }
@@ -88,6 +98,10 @@ public class ShopGui : MonoBehaviour
         Armor[] boots = EquipmentManager.Instance.ArrayOfBoots;
         for (int i = 0; i < boots.Length; i++)
         { this.listOfBoots.Add(SpawnItem(i, boots[i], EquipmentManager.ItemCategory.Boots)); }
+
+        Armor[] helmets = EquipmentManager.Instance.ArrayOfHelmets;
+        for (int i = 0; i < helmets.Length; i++)
+        { this.listOfHelmets.Add(SpawnItem(i, helmets[i], EquipmentManager.ItemCategory.Helmet)); }
     }
 
     private GameObject SpawnItem(int counter, Item item, EquipmentManager.ItemCategory itemCategory)
@@ -115,6 +129,8 @@ public class ShopGui : MonoBehaviour
         { this.listOfArmors[i].SetActive(this.currentCategory == EquipmentManager.ItemCategory.Armor); }
         for (int i = 0; i < this.listOfBoots.Count; i++)
         { this.listOfBoots[i].SetActive(this.currentCategory == EquipmentManager.ItemCategory.Boots); }
+        for (int i = 0; i < this.listOfBoots.Count; i++)
+        { this.listOfHelmets[i].SetActive(this.currentCategory == EquipmentManager.ItemCategory.Helmet); }
     }
 
     #endregion Privates

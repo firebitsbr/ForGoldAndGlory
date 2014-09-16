@@ -1,0 +1,13 @@
+D:\Ted\GitHub\ForGloryAndGold\Source\obj\Debug\Assembly-CSharp-Editor-vs.csprojResolveAssemblyReference.cache
+D:\Ted\GitHub\ForGloryAndGold\Source\Temp\bin\Debug\Assembly-CSharp-Editor.dll
+D:\Ted\GitHub\ForGloryAndGold\Source\Temp\bin\Debug\Assembly-CSharp-Editor.pdb
+D:\Ted\GitHub\ForGloryAndGold\Source\Temp\bin\Debug\UnityEditor.dll
+D:\Ted\GitHub\ForGloryAndGold\Source\Temp\bin\Debug\UnityEditor.Graphs.dll
+D:\Ted\GitHub\ForGloryAndGold\Source\Temp\bin\Debug\UnityEngine.dll
+D:\Ted\GitHub\ForGloryAndGold\Source\Temp\bin\Debug\Mono.Cecil.dll
+D:\Ted\GitHub\ForGloryAndGold\Source\Temp\bin\Debug\nunit.framework.dll
+D:\Ted\GitHub\ForGloryAndGold\Source\Temp\bin\Debug\Unity.DataContract.dll
+D:\Ted\GitHub\ForGloryAndGold\Source\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+D:\Ted\GitHub\ForGloryAndGold\Source\Temp\bin\Debug\Assembly-CSharp.pdb
+D:\Ted\GitHub\ForGloryAndGold\Source\obj\Debug\Assembly-CSharp-Editor.dll
+D:\Ted\GitHub\ForGloryAndGold\Source\obj\Debug\Assembly-CSharp-Editor.pdb
