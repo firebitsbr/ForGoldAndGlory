@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject HealthbarObj;
     public GameObject BulletObj;
+    public ParticleManager.Particle HitParticle;
     public Transform AimSpot;
     public Transform FireSpot;
     public float HealthbarOffset = 1f;
@@ -72,6 +73,8 @@ public class Enemy : MonoBehaviour
     {
         this.health -= damage;
         this.healthBar.UpdateBar(this.health, this.MaxHealth);
+
+        ParticleManager.Instance.SpawnParticle(this.HitParticle, this.FireSpot.position, 1f);
 
         if (health <= 0f)
         { Die(); }

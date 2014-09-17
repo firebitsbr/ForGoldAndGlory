@@ -103,6 +103,7 @@ public class Player : MonoBehaviour
         damage = Mathf.Max(0f, damage - this.totalArmorValue);
         this.health -= damage;
         PlayerInfoGui.Instance.UpdateHealthLabel(this.health, this.maxHealth);
+        ParticleManager.Instance.SpawnParticle(ParticleManager.Particle.Blood, this.AimSpot.position, 1f);
 
         if (health <= 0f && !this.isDead)
         { StartCoroutine(Die()); }

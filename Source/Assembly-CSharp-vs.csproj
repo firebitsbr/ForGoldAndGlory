@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>D:/Programs/Unity 4.5.3/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity 4.5.3/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>D:/Programs/Unity 4.5.3/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity 4.5.3/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +154,7 @@
      <Compile Include="Assets\Scripts\Misc\Bullet.cs" />
      <Compile Include="Assets\Scripts\Misc\EquipmentManager.cs" />
      <Compile Include="Assets\Scripts\Misc\GameMaster.cs" />
+     <Compile Include="Assets\Scripts\Misc\ParticleManager.cs" />
      <Compile Include="Assets\Scripts\Player\Armor.cs" />
      <Compile Include="Assets\Scripts\Player\Item.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />

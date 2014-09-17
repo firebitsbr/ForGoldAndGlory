@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>D:/Programs/Unity 4.5.3/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity 4.5.3/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>D:/Programs/Unity 4.5.3/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity 4.5.3/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -136,7 +136,7 @@
      <None Include="Assets\ExternalTools\NGUI\Resources\Shaders\Unlit - Depth.shader" />
      <None Include="Assets\ExternalTools\NGUI\Resources\Shaders\Unlit - Transparent Colored (SoftClip).shader" />
  <Reference Include="UnityEditor.Graphs">
- <HintPath>D:/Programs/Unity 4.5.3/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+ <HintPath>C:/Program Files (x86)/Unity 4.5.3/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
