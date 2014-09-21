@@ -50,11 +50,11 @@ public class ItemShopGui : MonoBehaviour
         Player.Instance.ModifyGold(-this.item.Cost);
         Player.Instance.UpdateItem(this.item, this.itemCategory);
 
-        this.owner.ShowToolTip();
+        this.owner.ShowToolTip(this.item);
     }
 
     public void ShowToolTips()
-    { this.owner.ShowToolTip(); }
+    { this.owner.ShowToolTip(this.item); }
 
     public void HideToolTips()
     { this.owner.HideToolTip(); }

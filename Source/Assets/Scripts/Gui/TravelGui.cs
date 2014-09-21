@@ -7,6 +7,19 @@ using System.Collections;
 
 public class TravelGui : MonoBehaviour
 {
+    #region Members
+
+    public UIScrollBar Scrollbar;
+
+    #endregion Members
+
+    #region UnityFunctions
+
+    void Update()
+    { UpdateScroll(); }
+
+    #endregion UnityFunctions
+
     #region Publics
 
     public void OnPressingPlanetOne()
@@ -16,4 +29,11 @@ public class TravelGui : MonoBehaviour
     { GameMaster.Instance.SwitchPlanet(1); }
 
     #endregion Publics
+
+    #region Privates
+
+    private void UpdateScroll()
+    { this.Scrollbar.value -= Input.GetAxis("Mouse ScrollWheel"); }
+
+    #endregion Privates
 }

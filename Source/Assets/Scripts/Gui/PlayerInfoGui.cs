@@ -61,11 +61,11 @@ public class PlayerInfoGui : MonoBehaviour
 
     public void UpdateHealthLabel(float health, float maxHealth)
     { 
-        this.HealthLabel.text = health.ToString("0"); 
+        this.HealthLabel.text = Mathf.Max(health, 0).ToString("0"); 
         this.Healthbar.width = Mathf.RoundToInt((health / maxHealth) * this.healthbarWidth);
     }
 
-    public void UpdateGoldLabel(int gold)
+    public void UpdateGoldLabel(long gold)
     { this.GoldLabel.text = gold.ToString("N0"); }
 
     public void UpdateHealBtn(float percentageLeft)

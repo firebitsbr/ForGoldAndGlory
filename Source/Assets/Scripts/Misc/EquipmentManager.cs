@@ -45,4 +45,31 @@ public class EquipmentManager : MonoBehaviour
     { instance = null; }
 
     #endregion InitAndDestruction
+
+    #region UnityFunctions
+
+    void Start()
+    { LoadItemCosts(); }
+
+    #endregion UnityFunctions
+
+    #region Privates
+
+    private void LoadItemCosts()
+    {
+        SetItemCost(this.ArrayOfWeapons);
+        SetItemCost(this.ArrayOfArmors);
+        SetItemCost(this.ArrayOfHelmets);
+        SetItemCost(this.ArrayOfBoots);
+    }
+
+    private void SetItemCost(Item[] arrayOfItems)
+    {
+        arrayOfItems[0].Cost = 100;
+        arrayOfItems[1].Cost = 500;
+        for (int i = 2; i < arrayOfItems.Length; i++)
+        { arrayOfItems[i].Cost = (arrayOfItems[i - 1].Cost * 12); }    
+    }
+
+    #endregion Privates
 }

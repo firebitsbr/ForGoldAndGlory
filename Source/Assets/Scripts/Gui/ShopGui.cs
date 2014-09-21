@@ -16,12 +16,14 @@ public class ShopGui : MonoBehaviour
     public UILabel TooltipHeader;
     public UILabel TooltipInfo;
     public UISprite TooltipIcon;
+    public UIScrollBar Scrollbar;
 
     private EquipmentManager.ItemCategory currentCategory = EquipmentManager.ItemCategory.Armor;
     private List<GameObject> listOfWeapons = new List<GameObject>();
     private List<GameObject> listOfArmors = new List<GameObject>();
     private List<GameObject> listOfBoots = new List<GameObject>();
     private List<GameObject> listOfHelmets = new List<GameObject>();
+    private Item hoveredItem;
 
     #endregion Members
 
@@ -33,36 +35,41 @@ public class ShopGui : MonoBehaviour
         SwitchItemCategory(EquipmentManager.ItemCategory.Weapon);
     }
 
+    void Update()
+    { UpdateScroll(); }
+
     #endregion UnityFunctions
 
     #region Publics
 
-    public void ShowToolTip()
+    public void ShowToolTip(Item item)
     {
+        this.hoveredItem = item;
+
         this.TooltipContainer.alpha = 1f;
         if (this.currentCategory == EquipmentManager.ItemCategory.Weapon)
         {
             this.TooltipHeader.text = Player.Instance.CurrentWeapon.ItemName;
-            this.TooltipInfo.text = Player.Instance.CurrentWeapon.Damage.ToString("N0");
             this.TooltipIcon.spriteName = "DamageIcon";
+            SetTooltipInfo(Player.Instance.CurrentWeapon.Damage, (this.hoveredItem as Weapon).Damage);
         }
         else if (this.currentCategory == EquipmentManager.ItemCategory.Armor)
         {
             this.TooltipHeader.text = Player.Instance.CurrentArmor.ItemName;
-            this.TooltipInfo.text = Player.Instance.CurrentArmor.ArmorValue.ToString("N0");
             this.TooltipIcon.spriteName = "ArmorIcon";
+            SetTooltipInfo(Player.Instance.CurrentArmor.ArmorValue, (this.hoveredItem as Armor).ArmorValue);
         }
         else if (this.currentCategory == EquipmentManager.ItemCategory.Boots)
         {
             this.TooltipHeader.text = Player.Instance.CurrentBoots.ItemName;
-            this.TooltipInfo.text = Player.Instance.CurrentBoots.ArmorValue.ToString("N0");
             this.TooltipIcon.spriteName = "ArmorIcon";
+            SetTooltipInfo(Player.Instance.CurrentBoots.ArmorValue, (this.hoveredItem as Armor).ArmorValue);
         }
         else if (this.currentCategory == EquipmentManager.ItemCategory.Helmet)
         {
             this.TooltipHeader.text = Player.Instance.CurrentHelmet.ItemName;
-            this.TooltipInfo.text = Player.Instance.CurrentHelmet.ArmorValue.ToString("N0");
             this.TooltipIcon.spriteName = "ArmorIcon";
+            SetTooltipInfo(Player.Instance.CurrentHelmet.ArmorValue, (this.hoveredItem as Armor).ArmorValue);
         }
     }
 
@@ -116,12 +123,16 @@ public class ShopGui : MonoBehaviour
         return go;
     }
 
+    private void UpdateScroll()
+    { this.Scrollbar.value -= Input.GetAxis("Mouse ScrollWheel"); }
+
     private void SwitchItemCategory(EquipmentManager.ItemCategory newCategory)
     {
         if (this.currentCategory == newCategory)
         { return; }
 
         this.currentCategory = newCategory;
+        this.Scrollbar.value = 0f;
 
         for (int i = 0; i < this.listOfWeapons.Count; i++)
         { this.listOfWeapons[i].SetActive(this.currentCategory == EquipmentManager.ItemCategory.Weapon); }
@@ -131,6 +142,18 @@ public class ShopGui : MonoBehaviour
         { this.listOfBoots[i].SetActive(this.currentCategory == EquipmentManager.ItemCategory.Boots); }
         for (int i = 0; i < this.listOfBoots.Count; i++)
         { this.listOfHelmets[i].SetActive(this.currentCategory == EquipmentManager.ItemCategory.Helmet); }
+    }
+
+    private void SetTooltipInfo(float current, float hovered)
+    {
+        float difference = hovered - current;
+
+        if (difference > 0f)
+        { this.TooltipInfo.text = current.ToString("N0") + " [00FF00]+" + difference + "[-]"; }
+        else if (difference < 0f)
+        { this.TooltipInfo.text = current.ToString("N0") + " [FF0000]" + difference + "[-]"; }
+        else
+        { this.TooltipInfo.text = current.ToString("N0"); }       
     }
 
     #endregion Privates

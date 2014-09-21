@@ -10,7 +10,7 @@ public class Item : MonoBehaviour
     #region Members
 
     public string ItemName = "";
-    public int Cost = 100;
+    public long Cost = 100;
     public Sprite Sprite;
 
     #endregion Members

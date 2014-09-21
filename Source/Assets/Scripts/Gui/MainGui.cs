@@ -33,6 +33,7 @@ public class MainGui : MonoBehaviour
     public GameObject TravelContainer;
     public GameObject LevelupContainer;
     public GameObject PlayerHaveDiedContainer;
+    public UILabel PlayerHaveDiedLabel;
     public GameObject FeedbackCenterAnchor;
 
     private GuiState currentState = GuiState.PlayerInfo;
@@ -66,8 +67,10 @@ public class MainGui : MonoBehaviour
         StartCoroutine(FadeAlphaOverTime(this.LevelupContainer, 1f, 0f, 0.5f));
     }
 
-    public void ShowPlayerHaveDied()
+    public void ShowPlayerHaveDied(int expLoss)
     {
+        this.PlayerHaveDiedLabel.text = "YOU HAVE DIED!\nYOU LOST " + expLoss + " EXP!";
+
         TweenAlpha.Begin(this.PlayerHaveDiedContainer, 0.2f, 1f);
         StartCoroutine(FadeAlphaOverTime(this.PlayerHaveDiedContainer, 1f, 0f, 0.5f));
     }

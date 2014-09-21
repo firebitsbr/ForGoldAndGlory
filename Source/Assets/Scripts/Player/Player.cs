@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 
     private int level = 1;
     private int experience = 0;
-    private int gold = 0;
+    private long gold = 0;
     private int totalArmorValue = 0;
     private float maxHealth = 100f;
     private float health = 100f;
@@ -115,10 +115,10 @@ public class Player : MonoBehaviour
         CheckIfLevelUp();
     }
 
-    public bool HasEnoughGold(int gold)
+    public bool HasEnoughGold(long gold)
     { return this.gold >= gold; }
 
-    public void ModifyGold(int gold)
+    public void ModifyGold(long gold)
     {
         this.gold += gold;
         PlayerInfoGui.Instance.UpdateGoldLabel(this.gold);
@@ -201,9 +201,11 @@ public class Player : MonoBehaviour
     private IEnumerator Die()
     {
         this.isDead = true;
+        int expLoss = Mathf.RoundToInt(this.experience * 0.1f);
+        AddExperience(expLoss * -1);
         BattleManager.Instance.PlayerHasDied();
-        MainGui.Instance.ShowPlayerHaveDied();
-
+        MainGui.Instance.ShowPlayerHaveDied(expLoss);
+        
         this.graphicsObject.SetActive(false);
 
         yield return new WaitForSeconds(2f);
