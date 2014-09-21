@@ -37,7 +37,7 @@ public class BattleManager : MonoBehaviour
     private bool isSpawningEnemy = false;
     private Enemy currentEnemy;
     private float enemySpawnRate = 2f;
-    private int planetId = 0;
+    private int areaId = 0;
 
     private BattleState currentState = BattleState.Waiting;
 
@@ -76,7 +76,7 @@ public class BattleManager : MonoBehaviour
         Destroy(this.currentEnemy.gameObject);
         this.currentEnemy = null;
 
-        this.currentState = BattleState.Waiting;
+        SwitchState(BattleState.Waiting);
     }
 
     public void EnemyHasDied()
@@ -86,21 +86,29 @@ public class BattleManager : MonoBehaviour
         Destroy(this.currentEnemy.gameObject);
         this.currentEnemy = null;
 
-        this.currentState = BattleState.Waiting;
+        SwitchState(BattleState.Waiting);
     }
 
     public void PlayerIsReady()
-    { this.currentState = BattleState.DecidingTurn; }
+    { SwitchState(BattleState.DecidingTurn); }
 
     public void PlayerAttackIsOver()
-    { this.currentState = BattleState.PlayerHasAttacked; }
+    { SwitchState(BattleState.PlayerHasAttacked); }
 
     public void EnemyAttackIsOver()
-    { this.currentState = BattleState.EnemyHasAttacked; }
+    { SwitchState(BattleState.EnemyHasAttacked); }
 
     #endregion Publics
 
     #region Privates
+
+    private void SwitchState(BattleState newState)
+    {
+        if (this.currentState == newState)
+        { return; }
+
+        this.currentState = newState;
+    }
 
     private void CheckOnBattle()
     {
@@ -114,10 +122,14 @@ public class BattleManager : MonoBehaviour
     {
         this.isSpawningEnemy = true;
         yield return new WaitForSeconds(this.enemySpawnRate);
-        this.currentEnemy = Instantiate(this.listOfEnemies[this.planetId], this.SpawnPoint.position, Quaternion.identity) as Enemy;
-        this.isSpawningEnemy = false;
 
-        this.currentState = BattleState.DecidingTurn;
+        if (!Player.Instance.IsDead)
+        {
+            this.currentEnemy = Instantiate(this.listOfEnemies[this.areaId], this.SpawnPoint.position, Quaternion.identity) as Enemy;
+            SwitchState(BattleState.DecidingTurn);
+        }
+
+        this.isSpawningEnemy = false;
     }
 
     private void UpdateBattle()
@@ -152,13 +164,13 @@ public class BattleManager : MonoBehaviour
 
     private void LetPlayerAttack()
     {
-        this.currentState = BattleState.WaitingForPlayer;
+        SwitchState(BattleState.WaitingForPlayer);
         Player.Instance.Attack();
     }
 
     private void LetEnemyAttack()
     {
-        this.currentState = BattleState.WaitingForEnemy;
+        SwitchState(BattleState.WaitingForEnemy);
         this.currentEnemy.Attack();
     }
 
@@ -175,10 +187,10 @@ public class BattleManager : MonoBehaviour
 
     #region Events
 
-    void OnSwitchingPlanet(int planetId)
+    void OnSwitchingArea(int areaId)
     {
         DestroyEnemy();
-        this.planetId = planetId;
+        this.areaId = areaId;
     }
 
     #endregion Events

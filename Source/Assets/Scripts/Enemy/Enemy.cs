@@ -74,7 +74,7 @@ public class Enemy : MonoBehaviour
         this.health -= damage;
         this.healthBar.UpdateBar(this.health, this.MaxHealth);
 
-        ParticleManager.Instance.SpawnParticle(this.HitParticle, this.FireSpot.position, 1f);
+        ParticleManager.Instance.SpawnParticle(this.HitParticle, this.AimSpot.position, 1f);
 
         if (health <= 0f)
         { Die(); }
@@ -109,11 +109,10 @@ public class Enemy : MonoBehaviour
     #region Events
 
     private void BulletHasReachedTarget()
-    { 
+    {
+        BattleManager.Instance.EnemyAttackIsOver();
         Player.Instance.TakeDamage(this.Damage);
         this.lastAttack = Time.time;
-
-        BattleManager.Instance.EnemyAttackIsOver();
     }
 
     #endregion Events

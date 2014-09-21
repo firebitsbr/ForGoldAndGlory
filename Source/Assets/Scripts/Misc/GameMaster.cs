@@ -38,8 +38,8 @@ public class GameMaster : MonoBehaviour
     public void AddListener(GameObject obj)
     { this.listOfListeners.Add(obj); }
 
-    public void SwitchPlanet(int planetId)
-    { SendMsg("OnSwitchingPlanet", planetId); }
+    public void SwitchArea(int areaId)
+    { SendMsg("OnSwitchingArea", areaId); }
 
     #endregion Publics
 

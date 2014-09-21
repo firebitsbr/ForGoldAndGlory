@@ -35,6 +35,8 @@ public class MainGui : MonoBehaviour
     public GameObject PlayerHaveDiedContainer;
     public UILabel PlayerHaveDiedLabel;
     public GameObject FeedbackCenterAnchor;
+    public GameObject BoughtItemContainer;
+    public UILabel BoughtItemLabel;
 
     private GuiState currentState = GuiState.PlayerInfo;
 
@@ -72,7 +74,14 @@ public class MainGui : MonoBehaviour
         this.PlayerHaveDiedLabel.text = "YOU HAVE DIED!\nYOU LOST " + expLoss + " EXP!";
 
         TweenAlpha.Begin(this.PlayerHaveDiedContainer, 0.2f, 1f);
-        StartCoroutine(FadeAlphaOverTime(this.PlayerHaveDiedContainer, 1f, 0f, 0.5f));
+        StartCoroutine(FadeAlphaOverTime(this.PlayerHaveDiedContainer, 2f, 0f, 0.5f));
+    }
+
+    public void ShowBoughtItem(string itemName)
+    {
+        this.BoughtItemLabel.text = "You have bought\n" + itemName;
+        TweenAlpha.Begin(this.BoughtItemContainer, 0.2f, 1f);
+        StartCoroutine(FadeAlphaOverTime(this.BoughtItemContainer, 2f, 0f, 0.5f));
     }
 
     public GameObject SpawnFollowObj(GameObject obj, Transform objToFollow, Vector3 offset)

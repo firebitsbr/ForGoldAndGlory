@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     { get { return this.experience; } }
     public Vector3 Position
     { get { return this.localTransform.position; } }
+    public bool IsDead
+    { get { return this.isDead; } }
 
     public Weapon CurrentWeapon;
     public Armor CurrentHelmet;
@@ -208,10 +210,9 @@ public class Player : MonoBehaviour
         
         this.graphicsObject.SetActive(false);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         this.graphicsObject.SetActive(true);
-
         Respawn();
     }
 

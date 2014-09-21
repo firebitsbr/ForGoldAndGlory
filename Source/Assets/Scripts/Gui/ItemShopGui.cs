@@ -49,6 +49,7 @@ public class ItemShopGui : MonoBehaviour
 
         Player.Instance.ModifyGold(-this.item.Cost);
         Player.Instance.UpdateItem(this.item, this.itemCategory);
+        MainGui.Instance.ShowBoughtItem(this.item.ItemName);
 
         this.owner.ShowToolTip(this.item);
     }
